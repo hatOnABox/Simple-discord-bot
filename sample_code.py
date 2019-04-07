@@ -66,7 +66,7 @@ async def on_message(message):
 
 
         if message.content.lower() == "!commands":
-            await client.send_message(message.channel, "!quote - Prints a funny quote\n!commands - pulls this list up again\n!source - prints a txt file with this bot's source code\n!add quote - adds quote (NOTE: only works if admins use it)\n!off - turns bot off (NOTE: only works if admins use it)\n!clear - clears full char (only admins can use)")
+            await client.send_message(message.channel, """!quote - Prints a funny quote\n!commands - pulls this list up again\n!source - prints a txt file with this bot's source code\n!add quote (quote) (author) - adds quote (NOTE: only works if admins use it)\n!off - turns bot off (NOTE: only works if admins use it)\n!clear - clears full char (only admins can use)\n!slowclap - makes the bot slow clap five times\n!love (put someones name here) - Spread the love to people""")
 
             if message.author.server_permissions.administrator == False:
                 down = True
@@ -116,6 +116,12 @@ async def on_message(message):
                 msgs.append(x)
             await client.delete_messages(msgs)
 
+
+        if str(message.content.lower())[0:5] == "!love":
+            if len(message.content.split(" ")) > 2:
+                await client.send_message(message.channel, "Love syntax incorrect!")
+            else:
+                await client.send_message(message.channel, "Spread some love to " + message.content.split(" ")[1] + "!")
 
 
 client.run("ENTER YOUR TOKEN HERE")
