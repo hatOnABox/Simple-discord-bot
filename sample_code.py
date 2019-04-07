@@ -124,7 +124,7 @@ async def on_message(message):
                 await client.send_message(message.channel, "Spread some love to " + message.content.split(" ")[1] + "!")
 
 
-        if message.content.lower() == "(╯°□°）╯︵ ┻━┻":
+        if  "(╯°□°）╯︵ ┻━┻" in message.content.lower():
             await client.send_message(message.channel, "┬─┬ ノ( ゜-゜ノ)")
 
 
