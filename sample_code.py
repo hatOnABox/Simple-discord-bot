@@ -60,6 +60,7 @@ async def on_message(message):
 
 
         if len(message.content) > 150 and message.author.bot == False and "http://" not in str(message.content) and "https://" not in str(message.content):
+
             await client.delete_message(message)
             await client.send_message(message.channel, str(message.author) + " that message was way too long!")
 
