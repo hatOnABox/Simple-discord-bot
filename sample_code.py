@@ -9,7 +9,6 @@ import threading
 client = discord.Client()
 down = False
 runningSleep = False
-kicklistener = {}
 
 
 def backgroundSleep():
