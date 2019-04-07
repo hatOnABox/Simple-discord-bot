@@ -61,7 +61,6 @@ async def on_message(message):
 
 
         if len(message.content) > 150 and message.author.bot == False:
-            #help(message.author)
             await client.delete_message(message)
             await client.send_message(message.channel, str(message.author) + " that message was way too long!")
 
@@ -90,6 +89,15 @@ async def on_message(message):
 
             await client.send_message(message.channel, "Add quote: " + quote + ' ' + author)
 
+
+        if message.content.lower() == "!slowclap":
+            for i in range(0, 5):
+                await client.send_message(message.channel, "*Clap*")
+                time.sleep(2)
+
+
+            if message.author.server_permissions.administrator == False:
+                down = True
 
 
         if message.content.isupper() == True and message.author.server_permissions.administrator == False:
