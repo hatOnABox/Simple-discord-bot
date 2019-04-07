@@ -61,7 +61,6 @@ async def on_message(message):
 
 
         if len(message.content) > 150:
-            print("hey")
             await client.delete_message(message)
             await client.send_message(message.channel, str(message.author) + " that message was way too long!")
 
@@ -93,16 +92,9 @@ async def on_message(message):
 
 
         if message.content.isupper() == True and message.author.server_permissions.administrator == False:
+            await client.delete_message(message)
             await client.send_message(message.channel, str(message.author) + " Thou shall not spam caps!!!")
 
-            try:
-                if kicklistener[str(message.author)] == 3:
-                    await client.kick(message.author)
-                    kicklistener[str(message.author)] = 0
-                else:
-                    kicklistener[str(message.author)] += 1
-            except:
-                kicklistener[str(message.author)] = 0
 
 
         if message.content.lower() == "!off" and message.author.server_permissions.administrator == True:
