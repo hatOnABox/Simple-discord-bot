@@ -123,5 +123,8 @@ async def on_message(message):
             else:
                 await client.send_message(message.channel, "Spread some love to " + message.content.split(" ")[1] + "!")
 
+            if message.author.server_permissions.administrator == False:
+                down = True
+
 
 client.run("ENTER YOUR TOKEN HERE")
