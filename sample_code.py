@@ -29,7 +29,6 @@ async def on_message(message):
     global down
     global runningSleep
 
-
     if down == True and message.author.server_permissions.administrator == False:
         if runningSleep == False:
             t = threading.Thread(target=backgroundSleep)
@@ -60,7 +59,7 @@ async def on_message(message):
                 down = True
 
 
-        if len(message.content) > 150 and message.author.bot == False:
+        if len(message.content) > 150 and message.author.bot == False and "http://" not in str(message.content) and "https://" not in str(message.content):
             await client.delete_message(message)
             await client.send_message(message.channel, str(message.author) + " that message was way too long!")
 
