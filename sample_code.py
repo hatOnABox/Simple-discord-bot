@@ -60,6 +60,12 @@ async def on_message(message):
                 down = True
 
 
+        if len(message.content) > 150:
+            print("hey")
+            await client.delete_message(message)
+            await client.send_message(message.channel, str(message.author) + " that message was way too long!")
+
+
         if message.content.lower() == "!commands":
             await client.send_message(message.channel, "!quote - Prints a funny quote\n!commands - pulls this list up again\n!source - prints a txt file with this bot's source code\n!add quote - adds quote (NOTE: only works if admins use it)\n!off - turns bot off (NOTE: only works if admins use it)\n!clear - clears full char (only admins can use)")
 
