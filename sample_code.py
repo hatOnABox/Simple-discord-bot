@@ -29,6 +29,7 @@ async def on_message(message):
     global down
     global runningSleep
 
+
     if down == True and message.author.server_permissions.administrator == False:
         if runningSleep == False:
             t = threading.Thread(target=backgroundSleep)
@@ -111,9 +112,10 @@ async def on_message(message):
 
         if message.content.lower() == "!clear" and message.author.server_permissions.administrator == True:
             msgs = []
-            async for x in client.logs_from(message.channel, limit=1000):
+            async for x in client.logs_from(message.channel):
                 msgs.append(x)
             await client.delete_messages(msgs)
+
 
 
 client.run("ENTER YOUR TOKEN HERE")
