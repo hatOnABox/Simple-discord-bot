@@ -60,7 +60,8 @@ async def on_message(message):
                 down = True
 
 
-        if len(message.content) > 150:
+        if len(message.content) > 150 and message.author.bot == False:
+            #help(message.author)
             await client.delete_message(message)
             await client.send_message(message.channel, str(message.author) + " that message was way too long!")
 
@@ -94,7 +95,6 @@ async def on_message(message):
         if message.content.isupper() == True and message.author.server_permissions.administrator == False:
             await client.delete_message(message)
             await client.send_message(message.channel, str(message.author) + " Thou shall not spam caps!!!")
-
 
 
         if message.content.lower() == "!off" and message.author.server_permissions.administrator == True:
