@@ -137,7 +137,7 @@ async def on_message(message):
                         kick(peopleToDestroy.index(message.server.get_member_named(message.content.split(' ')[1])))
                     except:
                         peopleToDestroy.append(message.server.get_member_named(message.content.split(' ')[1]))
-                        await client.send_message(message.channel, message.content.split(' ')[1] + ' you see BeepBot sharpening the kick hammer')
+                        await client.send_message(message.channel, message.content.split(' ')[1] + ' you see BeepBot sharpening the kick hammer...')
                 else:
                     await client.send_message(message.channel, "User " + message.content.split(' ')[1] + " does not exist")
 
