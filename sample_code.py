@@ -9,6 +9,7 @@ import threading
 client = discord.Client()
 down = False
 runningSleep = False
+peopleToDestroy = []
 
 
 def backgroundSleep():
@@ -118,7 +119,7 @@ async def on_message(message):
 
 
         if str(message.content.lower())[0:5] == "!love":
-            if len(message.content.split(" ")) > 2:
+            if len(message.content.split(" ")) != 2:
                 await client.send_message(message.channel, "Love syntax incorrect!")
             else:
                 await client.send_message(message.channel, "Spread some love to " + message.content.split(" ")[1] + "!")
@@ -126,6 +127,19 @@ async def on_message(message):
 
         if  "(╯°□°）╯︵ ┻━┻" in message.content.lower():
             await client.send_message(message.channel, "┬─┬ ノ( ゜-゜ノ)")
+        
+        
+        if message.content.lower()[0:8] == "!destroy" and message.author.server_permissions.administrator == True:
+            if len(message.content.split(' ')) == 2:
+                if message.server.get_member_named(message.content.split(' ')[1]) != None:
+                    try:
+                        await client.send_message(message.channel, 'BeepBot hits ' + message.content.split(' ')[1] + ' out of the park!!!')
+                        kick(peopleToDestroy.index(message.server.get_member_named(message.content.split(' ')[1])))
+                    except:
+                        peopleToDestroy.append(message.server.get_member_named(message.content.split(' ')[1]))
+                        await client.send_message(message.channel, message.content.split(' ')[1] + ' you see BeepBot sharpening the kick hammer')
+                else:
+                    await client.send_message(message.channel, "User " + message.content.split(' ')[1] + " does not exist")
 
 
 client.run("ENTER YOUR TOKEN HERE")
