@@ -9,7 +9,6 @@ import threading
 client = discord.Client()
 down = False
 runningSleep = False
-peopleToDestroy = []
 
 
 def backgroundSleep():
@@ -67,7 +66,7 @@ async def on_message(message):
 
 
         if message.content.lower() == "!commands":
-            await client.send_message(message.channel, """!quote - Prints a funny quote\n!commands - pulls this list up again\n!source - prints a txt file with this bot's source code\n!add quote (quote) (author) - adds quote (NOTE: only works if admins use it)\n!off - turns bot off (NOTE: only works if admins use it)\n!clear - clears full char (only admins can use)\n!slowclap - makes the bot slow clap five times\n!love (put someones name here) - Spread the love to people\n!destroy (put someones name here) - (only for admins) Gives the target user a warning. If you use it again it kicks the targer user.""")
+            await client.send_message(message.channel, """!quote - Prints a funny quote\n!commands - pulls this list up again\n!source - prints a txt file with this bot's source code\n!add quote (quote) (author) - adds quote (NOTE: only works if admins use it)\n!off - turns bot off (NOTE: only works if admins use it)\n!clear - clears full char (only admins can use)\n!slowclap - makes the bot slow clap five times\n!love (put someones name here) - Spread the love to people\n""")
 
             if message.author.server_permissions.administrator == False:
                 down = True
@@ -127,19 +126,6 @@ async def on_message(message):
 
         if  "(╯°□°）╯︵ ┻━┻" in message.content.lower():
             await client.send_message(message.channel, "┬─┬ ノ( ゜-゜ノ)")
-        
-        
-        if message.content.lower()[0:8] == "!destroy" and message.author.server_permissions.administrator == True:
-            if len(message.content.split(' ')) == 2:
-                if message.server.get_member_named(message.content.split(' ')[1]) != None:
-                    try:
-                        kick(peopleToDestroy.index(message.server.get_member_named(message.content.split(' ')[1])))
-                        await client.send_message(message.channel, 'BeepBot hits ' + message.content.split(' ')[1] + ' out of the park!!!')
-                    except:
-                        peopleToDestroy.append(message.server.get_member_named(message.content.split(' ')[1]))
-                        await client.send_message(message.channel, message.content.split(' ')[1] + ' you see BeepBot sharpening the kick hammer...')
-                else:
-                    await client.send_message(message.channel, "User " + message.content.split(' ')[1] + " does not exist")
 
 
 client.run("ENTER YOUR TOKEN HERE")
