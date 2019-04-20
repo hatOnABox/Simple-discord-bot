@@ -9,6 +9,7 @@ import threading
 client = discord.Client()
 down = False
 runningSleep = False
+i = 0
 
 
 def backgroundSleep():
@@ -26,6 +27,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    global i
     global down
     global runningSleep
 
@@ -68,7 +70,7 @@ async def on_message(message):
 
 
         if message.content.lower() == "!commands":
-            await client.send_message(message.channel, """!quote - Prints a funny quote\n!commands - pulls this list up again\n!source - prints a txt file with this bot's source code\n!add quote (quote) (author) - adds quote (NOTE: only works if admins use it)\n!off - turns bot off (NOTE: only works if admins use it)\n!clear - clears full char (only admins can use)\n!slowclap - makes the bot slow clap five times\n!love (put someones name here) - Spread the love to people\n""")
+            await client.send_message(message.channel, """!quote - Prints a funny quote\n!commands - pulls this list up again\n!source - prints a txt file with this bot's source code\n!add quote (quote) (author) - adds quote (NOTE: only works if admins use it)\n!off - turns bot off (NOTE: only works if admins use it)\n!clear - clears full char (only admins can use)\n!slowclap - makes the bot slow clap five times\n!love (put someones name here) - Spread the love to people\n!hide - sets the bots presence to invisible. If the bot is already invisible then the bot will appear online. When this command is ran the message "!hide" is deleted. (only admins can use this)""")
 
             if message.author.server_permissions.administrator == False:
                 down = True
@@ -124,6 +126,17 @@ async def on_message(message):
                 await client.send_message(message.channel, "Love syntax incorrect!")
             else:
                 await client.send_message(message.channel, "Spread some love to " + message.content.split(" ")[1] + "!")
+                
+        
+        if message.content.lower() == "!hide" and message.author.server_permissions.administrator == True:
+            if i == 0:
+                await client.delete_message(message)
+                await client.change_presence(status=discord.Status.invisible)
+                i = 1
+            else:
+                await client.delete_message(message)
+                await client.change_presence(status=discord.Status.online)
+                i = 0
 
 
 client.run("ENTER YOUR TOKEN HERE")
