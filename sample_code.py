@@ -63,6 +63,8 @@ async def on_message(message):
 
             await client.delete_message(message)
             await client.send_message(message.channel, str(message.author) + " that message was way too long!")
+        elif "(╯°□°）╯︵ ┻━┻" in message.content.lower():
+            await client.send_message(message.channel, "┬─┬ ノ( ゜-゜ノ)")
 
 
         if message.content.lower() == "!commands":
@@ -122,10 +124,6 @@ async def on_message(message):
                 await client.send_message(message.channel, "Love syntax incorrect!")
             else:
                 await client.send_message(message.channel, "Spread some love to " + message.content.split(" ")[1] + "!")
-
-
-        if  "(╯°□°）╯︵ ┻━┻" in message.content.lower():
-            await client.send_message(message.channel, "┬─┬ ノ( ゜-゜ノ)")
 
 
 client.run("ENTER YOUR TOKEN HERE")
