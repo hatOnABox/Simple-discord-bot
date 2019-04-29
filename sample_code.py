@@ -10,7 +10,7 @@ client = discord.Client()
 down = False
 runningSleep = False
 i = 0
-
+lastCapSpammer = None
 
 def backgroundSleep():
     global down
@@ -27,6 +27,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    global lastCapSpammer
     global i
     global down
     global runningSleep
@@ -105,8 +106,12 @@ async def on_message(message):
 
 
         if message.content.isupper() == True and message.author.server_permissions.administrator == False:
+            if lastCapSpammer == message.author:
+                pass
+            else:
+                await client.send_message(message.channel, str(message.author) + " Thou shall not spam caps!!!")
             await client.delete_message(message)
-            await client.send_message(message.channel, str(message.author) + " Thou shall not spam caps!!!")
+            lastCapSpammer = message.author
 
 
         if message.content.lower() == "!off" and message.author.server_permissions.administrator == True:
